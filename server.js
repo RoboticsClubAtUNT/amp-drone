@@ -140,15 +140,19 @@ board.on('ready', function () {
         }
         else if(turnAMP > 5)
         {
-          var right = pSpeed - turnAmp;
+          var right = pSpeed - (turnAmp * 3.64);
           turnRight(pSpeed, right);
         }
         else if(turnAMP < -5)
         {
-          var left = pSpeed + turnAmp;
+          var left = pSpeed + (turnAmp * 3.64);
           turnLeft(pSpeed, left);
         }
-    }
+        else
+        {
+          motorDrive();
+        }
+    });
 
-  }
+  });
 })
