@@ -119,4 +119,36 @@ board.on('ready', function () {
     motorGroupLeft.start(Speed);
   }
 
+  io.sockets.on('connection', function(socket)
+  {
+    socket.on('accel', function (data)
+    {
+        var turnAMP = data.beta;
+        var speedGamma = data.gamma;
+        var pSpeed = speedGamma * -1 * 2.83;
+
+        if(!(turnAMP > 5 || turnAMP < -5))
+        {
+          if(speedGamma > 0)
+          {
+            motorDrive(pSpeed, 'forward');
+          }
+          else if(speedGamma < 0)
+          {
+            motorDrive((pSpeed * -1), 'backward');
+          }
+        }
+        else if(turnAMP > 5)
+        {
+          var right = pSpeed - turnAmp;
+          turnRight(pSpeed, right);
+        }
+        else if(turnAMP < -5)
+        {
+          var left = pSpeed + turnAmp;
+          turnLeft(pSpeed, left);
+        }
+    }
+
+  }
 })
