@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Accelerometer Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+  </head>
+  <body>
+    <script>
+      var socket = io.connect('http://raspberrypi:8080');  // change to the server IP address
+
+      socket.on('date', function(data){
+        $('#date').text(data.date);
+      });
+
+        function orientation(event)
+        {
+          //gamma tilt left right Max +-90
+          //beta forward / backward tilt +-180
+          socket.emit('accel', {'beta': event.beta}, {'gamma', event.gama});
+
+          //Alpha This is a compass 0 = North || 0 - 360
+          //socket.emit('alpha', {'alpha': event.alpha});
+          console.log("Magnetometer: "
+            + event.alpha + ", "
+            + event.beta + ", "
+            + event.gamma
+          );
+
+        }
+
+        function getAccel()
+        {
+            if(window.DeviceOrientationEvent)
+           	{
+                window.addEventListener("deviceorientation", orientation, false);
+            }
+           	else
+           	{
+                socket.emit('notSupported');
+                console.log("DeviceOrientationEvent is not supported");
+            }
+           //console.log('emittedKey ', {'letter': String.fromCharCode(e.charCode)});
+           //socket.emit('client_data', {'letter': String.fromCharCode(e.charCode)});
+        }
+
+        function autoDrive()
+        {
+          socket emit('autoDrive');
+        }
+        
+    </script>
+    <button id="accel" type="button" onclick="getAccel()">Accelerometer</button>
+    <button id="auto" type="button" onclick="autoDrive()">Auto Drive</button>
+  </body>
+</html>
