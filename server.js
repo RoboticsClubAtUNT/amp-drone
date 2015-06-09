@@ -68,6 +68,7 @@ board.on('ready', function () {
 
         motorGroupRight.start(speed);
         motorGroupLeft.start(speed);
+        console.log('forward_motorDrive');
       }
       case 'backward':
       {
@@ -116,7 +117,7 @@ board.on('ready', function () {
     digitalGroupLeftB.high();
 
     motorGroupRight.start(minusSpeed);
-    motorGroupLeft.start(Speed);
+    motorGroupLeft.start(speed);
   }
 
   io.sockets.on('connection', function(socket)
@@ -126,6 +127,8 @@ board.on('ready', function () {
         var turnAMP = data.beta;
         var speedGamma = data.gamma;
         var pSpeed = speedGamma * -1 * 2.83;
+
+        console.log(data.gamma);
 
         if(!(turnAMP > 5 || turnAMP < -5))
         {
@@ -140,18 +143,24 @@ board.on('ready', function () {
         }
         else if(turnAMP > 5)
         {
-          var right = pSpeed - (turnAmp * 3.64);
-          turnRight(pSpeed, right);
+          var right = pSpeed - (turnAMP * 3.64);
+          rightTurn(pSpeed, right);
         }
         else if(turnAMP < -5)
         {
-          var left = pSpeed + (turnAmp * 3.64);
-          turnLeft(pSpeed, left);
+          var left = pSpeed + (turnAMP * 3.64);
+          leftTurn(pSpeed, left);
         }
         else
         {
-          motorDrive();
+          motorDrive(pSpeed, 'forward');
         }
+    });
+
+    socket.on('autoDrive', function (data)
+    {
+      motorDrive(255, 'forward');
+      console.log('forward_func');
     });
 
   });

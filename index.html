@@ -4,6 +4,7 @@
     <title>Accelerometer Test</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
   </head>
   <body>
     <script>
@@ -15,9 +16,7 @@
 
         function orientation(event)
         {
-          //gamma tilt left right Max +-90
-          //beta forward / backward tilt +-180
-          socket.emit('accel', {'beta': event.beta}, {'gamma', event.gama});
+
 
           //Alpha This is a compass 0 = North || 0 - 360
           //socket.emit('alpha', {'alpha': event.alpha});
@@ -27,6 +26,9 @@
             + event.gamma
           );
 
+          //gamma tilt left right Max +-90
+          //beta forward / backward tilt +-180
+          socket.emit('accel', {'beta': event.beta}); {'gamma': event.gamma});
         }
 
         function getAccel()
@@ -46,11 +48,13 @@
 
         function autoDrive()
         {
-          socket emit('autoDrive');
+          socket.emit('autoDrive');
         }
-        
+
     </script>
-    <button id="accel" type="button" onclick="getAccel()">Accelerometer</button>
-    <button id="auto" type="button" onclick="autoDrive()">Auto Drive</button>
+    <div class="btn-group" role="group" aria-label=". . .">
+      <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
+      <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
+    </div>
   </body>
 </html>
