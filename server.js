@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var fs = require('fs');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var five = require('johnny-five');
 var board = new five.Board()
 
@@ -140,7 +141,7 @@ board.on('ready', function () {
     motorGroupLeft.start(speed);
   }
 
-  io.sockets.on('connection', function(socket)
+  io.on('connection', function(socket)
   {
     socket.on('accel', function (data)
     {
@@ -184,4 +185,6 @@ board.on('ready', function () {
     });
 
   });
+
 })
+server.listen(3000);
