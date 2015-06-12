@@ -41,7 +41,7 @@ var server = app.listen(3030, function () {
 });
 
 
-set board to ready state to start transfer of data
+//set board to ready state to start transfer of data
 board.on('ready', function () {
 
 // Motor
