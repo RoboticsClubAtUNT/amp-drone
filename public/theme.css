@@ -1,0 +1,14 @@
+body{
+    background-color: #66CCFF;
+}
+p{
+    background-color: white;
+    color: black
+}
+#rcorners4 {
+    border-radius: 5px 5px 5px 5px;
+    background: #8AC007;
+    padding: 20px;
+    width: inherit;
+    height: inherit;
+}
