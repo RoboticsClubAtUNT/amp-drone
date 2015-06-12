@@ -1,7 +1,4 @@
 var express = require('express');
-// var io = require('socket.io')(82);
-var five = require('johnny-five');
-var board = new five.Board()
 var app = express();
 
 app.use('/static', express.static('public'));
@@ -17,7 +14,7 @@ app.get('/', function (req, res)
       }
     };
 
-    res.sendFile('/index.html', options, function (err)
+    res.sendFile('/public/index.html', options, function (err)
     {
        if (err)
        {
@@ -31,14 +28,12 @@ app.get('/', function (req, res)
     });
 });
 
-
-
 var server = app.listen(92, function () {
 
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Amp-Drone app listening at http://%s:%s', host, port);
+  console.log('Example app listening at http://%s:%s', host, port);
 
 });
 
