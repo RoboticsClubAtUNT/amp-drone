@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+var fs = require('fs');
 var five = require('johnny-five');
 var board = new five.Board()
 
@@ -55,7 +55,7 @@ board.on('ready', function () {
     pin: 6,
   });
 
-// digital pins needed to tell the motor controller "forward" and "backword"
+// digital pins needed to tell the motor controller "forward" and "backward"
   var digitalGroupRightA = new five.Pin({
     pin: 2,
     pin: 3,
