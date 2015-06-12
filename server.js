@@ -1,5 +1,5 @@
 var express = require('express');
-var io = require('socket.io')(8080);
+var io = require('socket.io')(82);
 var five = require('johnny-five');
 var board = new five.Board()
 var app = express();
