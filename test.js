@@ -35,7 +35,7 @@ board.on('ready', function () {
   motorGroupRight.forward(255);
 
   board.wait(5000, function() {
-  motorGroupRight.reverse();
+  motorGroupRight.reverse(255);
 });
 
   board.wait(5000, function() {
