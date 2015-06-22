@@ -16,16 +16,10 @@
   </head>
   <body>
     <script>
-      var socket = io.connect('http://raspberrypi:8080');  // change to the server IP address
-
-      socket.on('date', function(data){
-        $('#date').text(data.date);
-      });
+      var socket = io.connect('http://raspberrypi:3030');  // change to the server IP address
 
         function orientation(event)
         {
-
-
           //Alpha This is a compass 0 = North || 0 - 360
           //socket.emit('alpha', {'alpha': event.alpha});
           console.log("Magnetometer: "
@@ -36,7 +30,8 @@
 
           //gamma tilt left right Max +-90
           //beta forward / backward tilt +-180
-          socket.emit('accel', {'beta': event.beta}); {'gamma': event.gamma});
+          socket.emit('accel', {'beta': event.beta});
+          // {'gamma': event.gamma});
         }
 
         function getAccel()
