@@ -1,45 +1,24 @@
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var controller = require('http').createServer(handler);
+var io = require('socket.io').listen(controller);
+var fs = require('fs');
 var five = require('johnny-five');
 var board = new five.Board()
 
-app.use('/static', express.static('public'));
+controller.listen(8080);
 
-app.get('/', function (req, res)
-{
-    var options = {
-      root: __dirname + '/',
-      dotfiles: 'deny',
-      headers: {
-          'x-timestamp': Date.now(),
-          'x-sent': true
+function handler (req, res) {
+   fs.readFile(__dirname + '/index.html',
+    function (err, data) {
+      if (err) {
+        res.writeHead(500);
+        return res.end('Error loading index.html');
       }
-    };
-
-    res.sendFile('/index.html', options, function (err)
-    {
-       if (err)
-       {
-         console.log(err);
-         return res.end('Error loading index.html');
-       }
-       else
-       {
-           console.log('sent index.html');
-       }
-    });
-});
-
-var server = app.listen(3030, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-
-});
+      console.log('Connection');
+      res.writeHead(200);
+      res.end(data);
+      }
+   );
+}
 
 
 //set board to ready state to start transfer of data
@@ -187,4 +166,3 @@ board.on('ready', function () {
   });
 
 })
-server.listen(3000);
