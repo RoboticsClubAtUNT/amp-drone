@@ -47,12 +47,12 @@ board.on('ready', function () {
         motorGroupRight.reverse(170);
         console.log('reverse_motorDrive');
       }
-      default:
-      {
-        //stops all motors
-        motorGroupRight.stop();
-        console.log('stop');
-      }
+      // default:
+      // {
+      //   //stops all motors
+      //   motorGroupRight.stop();
+      //   console.log('stop');
+      // }
     }
   }
 
@@ -96,8 +96,7 @@ board.on('ready', function () {
 
     socket.on('autoDrive', function (data)
     {
-      // motorDrive(255, 'forward');
-      motorGroupRight.forward(255);
+      motorDrive(255, 'forward');
       console.log('forward_func');
     });
 
