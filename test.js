@@ -38,15 +38,13 @@ board.on('ready', function () {
     switch(direction)
     {
       case 1:
-      {
         motorGroupRight.forward(speed);
         console.log('forward_motorDrive');
-      }
+        break;
       case 2:
-      {
         motorGroupRight.reverse(170);
         console.log('reverse_motorDrive');
-      }
+        break;
       // default:
       // {
       //   //stops all motors
