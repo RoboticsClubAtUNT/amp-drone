@@ -97,7 +97,7 @@ board.on('ready', function () {
     socket.on('autoDrive', function (data)
     {
       // motorDrive(255, 'forward');
-      motorGroupRight.forward(speed);
+      motorGroupRight.forward(255);
       console.log('forward_func');
     });
 
