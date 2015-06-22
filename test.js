@@ -37,11 +37,11 @@ board.on('ready', function () {
   {
     switch(direction)
     {
-      case 1:
+      case 'forward':
         motorGroupRight.forward(speed);
         console.log('forward_motorDrive');
         break;
-      case 2:
+      case 'backward':
         motorGroupRight.reverse(170);
         console.log('reverse_motorDrive');
         break;
@@ -94,7 +94,7 @@ board.on('ready', function () {
 
     socket.on('autoDrive', function (data)
     {
-      motorDrive(255, 1);
+      motorDrive(255, 'forward');
       console.log('forward_func');
     });
 
