@@ -25,11 +25,18 @@ function handler (req, res) {
 board.on('ready', function () {
 
 // Motor
-  var motorGroupRight = new five.Motor({
+  var motorGroupRight_1 = new five.Motor({
     pins: {
       pwm: 3,
       dir: 2,
       cdir: 4
+    }
+  });
+  var motorGroupRight_2 = new five.Motor({
+    pins: {
+      pwm: 9,
+      dir: 8,
+      cdir: 10
     }
   });
 
@@ -38,7 +45,8 @@ board.on('ready', function () {
     switch(direction)
     {
       case 'forward':
-        motorGroupRight.forward(speed);
+        motorGroupRight_1.forward(speed);
+        motorGroupRight_2.forward(speed);
         console.log('forward_motorDrive');
         break;
       case 'backward':
