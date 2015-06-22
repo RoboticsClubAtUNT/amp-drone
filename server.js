@@ -25,99 +25,79 @@ function handler (req, res) {
 board.on('ready', function () {
 
 // Motor
-  var motorGroupRight = new five.Motor({
-    pin: 10,
-    pin: 11,
-  });
-//group2
-  var motorGroupLeft = new five.Motor({
-    pin: 5,
-    pin: 6,
-  });
+var motorGroupRight_1 = new five.Motor({
+  pins: {
+    pwm: 3,
+    dir: 2,
+    cdir: 4
+  }
+});
+var motorGroupRight_2 = new five.Motor({
+  pins: {
+    pwm: 5,
+    dir: 6,
+    cdir: 7
+  }
+});
 
-// digital pins needed to tell the motor controller "forward" and "backward"
-  var digitalGroupRightA = new five.Pin({
-    pin: 2,
-    pin: 3,
-  });
-  var digitalGroupRightB = new five.Pin({
-    pin: 4,
-    pin: 7,
-  });
-//group 2
-  var digitalGroupLeftA = new five.Pin({
-    pin: 8,
-    pin: 9,
-  });
-  var digitalGroupLeftB = new five.Pin({
-    pin: 12,
-    pin: 13,
-  });
+var motorGroupLeft_1 = new five.Motor({
+  pins: {
+    pwm: 9,
+    dir: 8,
+    cdir: 10
+  }
+});
+var motorGroupLeft_2 = new five.Motor({
+  pins: {
+    pwm: 11,
+    dir: 12,
+    cdir: 13
+  }
+});
 
   function motorDrive(speed, direction)
   {
     switch(direction)
     {
       case 'forward':
-      {
-        digitalGroupRightA.low();
-        digitalGroupRightB.high();
+        motorGroupRight_1.forward(speed);
+        motorGroupRight_2.forward(speed);
 
-        digitalGroupLeftA.low();
-        digitalGroupLeftB.high();
+        motorGroupLeft_1.forward(speed);
+        motorGroupLeft_2.forward(speed);
 
-        motorGroupRight.start(speed);
-        motorGroupLeft.start(speed);
         console.log('forward_motorDrive');
-      }
+        break;
       case 'backward':
-      {
-        digitalGroupRightA.high();
-        digitalGroupRightB.low();
+        motorGroupRight_1.rev(speed);
+        motorGroupRight_2.rev(speed);
 
-        digitalGroupLeftA.high();
-        digitalGroupLeftB.low();
-
-        motorGroupRight.start(speed);
-        motorGroupLeft.start(speed);
-      }
-      default:
-      {
-        //stops all motors
-        digitalGroupRightA.low();
-        digitalGroupRightB.low();
-
-        digitalGroupLeftA.low();
-        digitalGroupLeftB.low();
-
-        motorGroupRight.start(0);
-        motorGroupLeft.start(0);
-      }
+        motorGroupLeft_1.rev(speed);
+        motorGroupLeft_2.rev(speed);
+        console.log('reverse case');
+        break;
     }
   }
 
   function rightTurn(speed, minusSpeed)
   {
-    digitalGroupRightA.low();
-    digitalGroupRightB.high();
+      motorGroupRight_1.rev(minusSpeed);
+      motorGroupRight_2.rev(minusSpeed);
 
-    digitalGroupLeftA.low();
-    digitalGroupLeftB.high();
-
-    motorGroupRight.start(speed);
-    motorGroupLeft.start(minusSpeed);
+      motorGroupLeft_1.forward(speed);
+      motorGroupLeft_2.forward(speed);
+      console.log('turn right case');
   }
 
   function leftTurn(speed, minusSpeed)
   {
-    digitalGroupRightA.low();
-    digitalGroupRightB.high();
+      motorGroupLeft_1.rev(minusSpeed);
+      motorGroupLeft_2.rev(minusSpeed);
 
-    digitalGroupLeftA.low();
-    digitalGroupLeftB.high();
+      motorGroupRight_1.forward(speed);
+      motorGroupRight_2.forward(speed);
 
-    motorGroupRight.start(minusSpeed);
-    motorGroupLeft.start(speed);
+      console.log('turn left case');
   }
 
   io.on('connection', function(socket)
