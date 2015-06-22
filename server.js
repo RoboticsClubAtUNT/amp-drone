@@ -122,13 +122,13 @@ board.on('ready', function () {
 
   io.on('connection', function(socket)
   {
-    socket.on('accel', function (data)
+    socket.on('mag', function (data)
     {
-        var turnAMP = data.beta;
-        var speedGamma = data.gamma;
+        var turnAMP = data.Results[0];
+        var speedGamma = data.Results[1];
         var pSpeed = speedGamma * -1 * 2.83;
 
-        console.log(data.gamma);
+        console.log(data.Results[1]);
 
         if(!(turnAMP > 5 || turnAMP < -5))
         {

@@ -30,8 +30,9 @@
 
           //gamma tilt left right Max +-90
           //beta forward / backward tilt +-180
-          socket.emit('accel', {'beta': event.beta});
-          // {'gamma': event.gamma});
+          var magnetometer = [event.beta, event.gamma];
+          socket.emit('mag', {'Results': magnetometer});
+          // socket.emit('meter_2', {'gamma': event.gamma});
         }
 
         function getAccel()
