@@ -39,10 +39,10 @@ board.on('ready', function () {
   console.log('reverse');
 });
 
-  board.wait(5000, function() {
-  motorGroupRight.stop();
-  console.log('stop');
-});
+//   board.wait(5000, function() {
+//   motorGroupRight.stop();
+//   console.log('stop');
+// });
   // function motorDrive(speed, direction)
   // {
   //   switch(direction)
