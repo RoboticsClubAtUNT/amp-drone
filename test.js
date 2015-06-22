@@ -26,9 +26,11 @@ board.on('ready', function () {
 
 // Motor
   var motorGroupRight = new five.Motor({
-    pwm: 3,
-    dir: 2,
-    cdir: 4
+    pins: {
+      pwm: 3,
+      dir: 2,
+      cdir: 4
+    }
   });
 
   function motorDrive(speed, direction)
