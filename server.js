@@ -128,8 +128,8 @@ board.on('ready', function () {
         var speedGamma = data.Results[1];
         var pSpeed = speedGamma * -1 * 2.83;
 
-        console.log('gamma' + data.Results[1]);
-        console.log('beta' + data.Results[0]);
+        // console.log('gamma' + data.Results[1]);
+        // console.log('beta' + data.Results[0]);
 
         if(!(turnAMP > 5 || turnAMP < -5))
         {
