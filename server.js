@@ -66,7 +66,7 @@ var motorGroupLeft_2 = new five.Motor({
         motorGroupLeft_1.forward(speed);
         motorGroupLeft_2.forward(speed);
 
-        console.log('Case: forward');
+        console.log('Case: forward - ' speed);
         break;
       case 'backward':
         motorGroupRight_1.rev(speed);
@@ -74,7 +74,7 @@ var motorGroupLeft_2 = new five.Motor({
 
         motorGroupLeft_1.rev(speed);
         motorGroupLeft_2.rev(speed);
-        console.log('Case: backward');
+        console.log('Case: backward - ' speed);
         break;
       case 'stop':
         motorGroupRight_1.stop(speed);
@@ -111,8 +111,8 @@ var motorGroupLeft_2 = new five.Motor({
     socket.on('mag', function (data)
     {
         var turnAMP = data.Results[0];
-        var speedGamma = data.Results[1];
-        var pSpeed = speedGamma * -2.83;
+        var speedGamma = data.Results[1] * 2.83;
+        var pSpeed = speedGamma * -1;
 
         // console.log('gamma' + data.Results[1]);
         // console.log('beta' + data.Results[0]);
@@ -121,7 +121,7 @@ var motorGroupLeft_2 = new five.Motor({
         {
           if(speedGamma > -10)
           {
-            motorDrive(pSpeed, 'forward');
+            motorDrive(speedGamma, 'forward');
           }
           else if(speedGamma < 10)
           {
