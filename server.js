@@ -66,7 +66,7 @@ var motorGroupLeft_2 = new five.Motor({
         motorGroupLeft_1.forward(speed);
         motorGroupLeft_2.forward(speed);
 
-        console.log('Case: forward - ' speed);
+        console.log('Case: forward - ', speed);
         break;
       case 'backward':
         motorGroupRight_1.rev(speed);
@@ -74,14 +74,15 @@ var motorGroupLeft_2 = new five.Motor({
 
         motorGroupLeft_1.rev(speed);
         motorGroupLeft_2.rev(speed);
-        console.log('Case: backward - ' speed);
+        console.log('Case: backward - ', speed);
         break;
       case 'stop':
-        motorGroupRight_1.stop(speed);
-        motorGroupRight_2.stop(speed);
+        motorGroupRight_1.stop();
+        motorGroupRight_2.stop();
 
-        motorGroupLeft_1.stop(speed);
-        motorGroupLeft_2.stop(speed);
+        motorGroupLeft_1.stop();
+        motorGroupLeft_2.stop();
+        console.log('Case: Stop - ', speed);
     }
   }
 
@@ -140,7 +141,7 @@ var motorGroupLeft_2 = new five.Motor({
         }
         else
         {
-          motorDrive(pSpeed, 'forward');
+          motorDrive(pSpeed, 'stop');
         }
     });
 
