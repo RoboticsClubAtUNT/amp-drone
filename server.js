@@ -66,7 +66,7 @@ var motorGroupLeft_2 = new five.Motor({
         motorGroupLeft_1.forward(speed);
         motorGroupLeft_2.forward(speed);
 
-        console.log('forward_motorDrive');
+        console.log('Case: forward');
         break;
       case 'backward':
         motorGroupRight_1.rev(speed);
@@ -74,8 +74,14 @@ var motorGroupLeft_2 = new five.Motor({
 
         motorGroupLeft_1.rev(speed);
         motorGroupLeft_2.rev(speed);
-        console.log('reverse case');
+        console.log('Case: backward');
         break;
+      case 'stop':
+        motorGroupRight_1.stop(speed);
+        motorGroupRight_2.stop(speed);
+
+        motorGroupLeft_1.stop(speed);
+        motorGroupLeft_2.stop(speed);
     }
   }
 
@@ -86,7 +92,7 @@ var motorGroupLeft_2 = new five.Motor({
 
       motorGroupLeft_1.forward(speed);
       motorGroupLeft_2.forward(speed);
-      console.log('turn right case');
+      console.log('Case: right turn');
   }
 
   function leftTurn(speed, minusSpeed)
@@ -97,7 +103,7 @@ var motorGroupLeft_2 = new five.Motor({
       motorGroupRight_1.forward(speed);
       motorGroupRight_2.forward(speed);
 
-      console.log('turn left case');
+      console.log('Case: Left turn');
   }
 
   io.on('connection', function(socket)
@@ -106,20 +112,20 @@ var motorGroupLeft_2 = new five.Motor({
     {
         var turnAMP = data.Results[0];
         var speedGamma = data.Results[1];
-        var pSpeed = speedGamma * -1 * 2.83;
+        var pSpeed = speedGamma * -2.83;
 
         // console.log('gamma' + data.Results[1]);
         // console.log('beta' + data.Results[0]);
 
-        if(!(turnAMP > 5 || turnAMP < -5))
+        if(turnAMP < 5 && turnAMP > -5)
         {
-          if(speedGamma > 0)
+          if(speedGamma > -10)
           {
             motorDrive(pSpeed, 'forward');
           }
-          else if(speedGamma < 0)
+          else if(speedGamma < 10)
           {
-            motorDrive((pSpeed * -1), 'backward');
+            motorDrive((pSpeed), 'backward');
           }
         }
         else if(turnAMP > 5)
