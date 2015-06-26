@@ -2,20 +2,19 @@
 <html>
   <head>
     <title>Accelerometer Test</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/static/jquery/jquery-2.1.4.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js" type="text/js"></script>
+    <script src="/public/jquery/jquery-2.1.4.min.js" type="text/js"></script>
+    <script src="/public/bootstrap/js/bootstrap.js" type="text/js"></script>
+    <script src="/public/bootstrap/js/bootstrap.min.js" type="text/js"></script>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-social.css">
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="/static/theme.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
   </head>
   <body>
-    <script>
+    <script type="text/js">
       var socket = io.connect('http://raspberrypi:8080');  // change to the server IP address
 
         function orientation(event)
@@ -56,7 +55,7 @@
         }
 
     </script>
-    <div class="btn-group" role="group" aria-label=". . .">
+    <div class="btn-group">
       <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
       <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
     </div>

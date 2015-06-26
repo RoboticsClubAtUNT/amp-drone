@@ -2,13 +2,14 @@ var controller = require('http').createServer(handler);
 var io = require('socket.io').listen(controller);
 var fs = require('fs');
 var five = require('johnny-five');
-var board = new five.Board()
+var board = new five.Board();
 
 controller.listen(8080);
 
-function handler (req, res) {
+function handler(req, res)
+{
    fs.readFile(__dirname + '/index.html',
-    function (err, data) {
+    function(err, data) {
       if (err) {
         res.writeHead(500);
         return res.end('Error loading index.html');
@@ -22,7 +23,7 @@ function handler (req, res) {
 
 
 //set board to ready state to start transfer of data
-board.on('ready', function () {
+board.on('ready', function() {
 
 // Motor
 var motorGroupRight_1 = new five.Motor({
@@ -57,7 +58,7 @@ var motorGroupLeft_2 = new five.Motor({
 
   function motorDrive(speed, direction)
   {
-    switch(direction)
+    switch (direction)
     {
       case 'forward':
         motorGroupRight_1.forward(speed);
@@ -109,7 +110,7 @@ var motorGroupLeft_2 = new five.Motor({
 
   io.on('connection', function(socket)
   {
-    socket.on('mag', function (data)
+    socket.on('mag', function(data)
     {
         var turnAMP = data.Results[0];
         var speedGamma = data.Results[1] * 2.83;
@@ -118,23 +119,23 @@ var motorGroupLeft_2 = new five.Motor({
         // console.log('gamma' + data.Results[1]);
         // console.log('beta' + data.Results[0]);
 
-        if(turnAMP < 5 && turnAMP > -5)
+        if (turnAMP < 5 && turnAMP > -5)
         {
-          if(speedGamma > -10)
+          if (speedGamma > -10)
           {
             motorDrive(speedGamma, 'forward');
           }
-          else if(speedGamma < 10)
+          else if (speedGamma < 10)
           {
             motorDrive((pSpeed), 'backward');
           }
         }
-        else if(turnAMP > 5)
+        else if (turnAMP > 5)
         {
           var right = pSpeed - (turnAMP * 3.64);
           rightTurn(pSpeed, right);
         }
-        else if(turnAMP < -5)
+        else if (turnAMP < -5)
         {
           var left = pSpeed + (turnAMP * 3.64);
           leftTurn(pSpeed, left);
@@ -145,7 +146,7 @@ var motorGroupLeft_2 = new five.Motor({
         }
     });
 
-    socket.on('autoDrive', function (data)
+    socket.on('autoDrive', function(data)
     {
       motorDrive(255, 'forward');
       console.log('forward_func');
@@ -153,4 +154,4 @@ var motorGroupLeft_2 = new five.Motor({
 
   });
 
-})
+});
