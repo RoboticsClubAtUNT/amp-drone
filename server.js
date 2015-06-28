@@ -1,28 +1,12 @@
-var controller = require('http').createServer();
-var io = require('socket.io').listen(controller);
-var fs = require('fs');
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var five = require('johnny-five');
-var express = require('express');
-var app = express();
+
 app.use('/static', express.static('public'));
+
 var board = new five.Board();
 
-controller.listen(3030);
-
-// function handler(req, res)
-// {
-//    fs.readFile(__dirname + '/index.html',
-//     function(err, data) {
-//       if (err) {
-//         res.writeHead(500);
-//         return res.end('Error loading index.html');
-//       }
-//       console.log('Connection');
-//       res.writeHead(200);
-//       res.end(data);
-//       }
-//    );
-// }
 app.get('/', function (req, res)
 {
     var options = {
