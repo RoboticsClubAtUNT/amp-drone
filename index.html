@@ -14,7 +14,8 @@
   </head>
   <body>
     <script type="text/js">
-      var socket = io.connect('http://raspberrypi:3030');  // change to the server IP address
+        var host = window.location.hostname;
+        var socket = io.connect('http://' + host);  // change to the server IP address
 
         function orientation(event)
         {
@@ -54,9 +55,16 @@
         }
 
     </script>
-    <div class="btn-group">
-      <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
-      <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="btn-group">
+                    <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
+                    <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
+                </div>
+            </div>
+        </div>
     </div>
+
   </body>
 </html>
