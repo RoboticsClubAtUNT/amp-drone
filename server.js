@@ -39,7 +39,7 @@ app.get('/', function (req, res)
 
 
 
-var server = app.listen(3030, function () {
+var server = app.listen(server, function () {
 
   var host = server.address().address;
   var port = server.address().port;
