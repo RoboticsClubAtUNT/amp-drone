@@ -34,7 +34,7 @@ app.get('/', function (req, res)
       }
     };
 
-    res.sendFile('/public/index.html', options, function (err)
+    res.sendFile('/index.html', options, function (err)
     {
        if (err)
        {
