@@ -2,8 +2,6 @@ var express = require("express");
 var app = express();
 var port = 3030;
 
-var io = require('socket.io').listen(app.listen(port));
-
 
 var five = require('johnny-five');
 
@@ -36,6 +34,7 @@ app.get('/', function (req, res)
     });
 });
 
+var io = require('socket.io').listen(app.listen(port));
 //set board to ready state to start transfer of data
 board.on('ready', function() {
 
