@@ -3,7 +3,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var five = require('johnny-five');
 
-app.use('/static', express.static('public'));
+app.use('/static', app.static('public'));
 
 var board = new five.Board();
 
