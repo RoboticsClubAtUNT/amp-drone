@@ -9,8 +9,9 @@
   "author": "Jeff Anderson, UNT Robotics",
   "license": "ISC",
   "dependencies": {
+    "express": "4.12.4",
     "johnny-five": "^0.8.56",
-    "socket.io": "^1.3.5",
-    "express": "4.12.4"
+    "raspicam": "^0.2.13",
+    "socket.io": "^1.3.5"
   }
 }
