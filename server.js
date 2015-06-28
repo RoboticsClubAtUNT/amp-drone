@@ -1,9 +1,10 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var five = require('johnny-five');
 
-app.use('/static', app.static('public'));
+app.use('/static', express.static('public'));
 
 var board = new five.Board();
 
