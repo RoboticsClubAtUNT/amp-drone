@@ -7,7 +7,7 @@ var app = express();
 app.use('/static', express.static('public'));
 var board = new five.Board();
 
-controller.listen(3000);
+controller.listen(3030);
 
 // function handler(req, res)
 // {
@@ -50,7 +50,7 @@ app.get('/', function (req, res)
 
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(3030, function () {
 
   var host = server.address().address;
   var port = server.address().port;
