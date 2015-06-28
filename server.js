@@ -1,9 +1,11 @@
+var express = require('express');
 var app = express()
   , http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server);
 
 server.listen(3030);
+
 var five = require('johnny-five');
 
 app.use('/static', express.static('public'));
