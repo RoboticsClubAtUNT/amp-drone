@@ -1,10 +1,9 @@
-var express = require('express');
-var app = express()
-  , http = require('http')
-  , server = http.createServer(app)
-  , io = require('socket.io').listen(server);
+var express = require("express");
+var app = express();
+var port = 3030;
 
-server.listen(3030);
+var io = require('socket.io').listen(app.listen(port));
+
 
 var five = require('johnny-five');
 
@@ -35,17 +34,6 @@ app.get('/', function (req, res)
            console.log('sent index.html');
        }
     });
-});
-
-
-
-var server = app.listen(server, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('AMP-Drone listening at http://%s:%s', host, port);
-
 });
 
 //set board to ready state to start transfer of data
