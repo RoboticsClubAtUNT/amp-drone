@@ -16,7 +16,7 @@ app.get('/', function (req, res)
 {
     var options = {
       root: __dirname + '/',
-      dotfiles: 'deny',
+      dotfiles: 'allow',
       headers: {
           'x-timestamp': Date.now(),
           'x-sent': true
