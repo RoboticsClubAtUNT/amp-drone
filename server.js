@@ -1,4 +1,4 @@
-var controller = require('http').createServer(handler);
+var controller = require('http').createServer();
 var io = require('socket.io').listen(controller);
 var fs = require('fs');
 var five = require('johnny-five');
