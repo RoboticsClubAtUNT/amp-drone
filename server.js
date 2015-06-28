@@ -7,7 +7,7 @@ var app = express();
 app.use('/static', express.static('public'));
 var board = new five.Board();
 
-controller.listen(8080);
+controller.listen(3000);
 
 // function handler(req, res)
 // {
