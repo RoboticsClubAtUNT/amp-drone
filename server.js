@@ -13,16 +13,7 @@ var board = new five.Board();
 
 app.get('/', function (req, res)
 {
-    var options = {
-      root: __dirname + '/',
-      dotfiles: 'allow',
-      headers: {
-          'x-timestamp': Date.now(),
-          'x-sent': true
-      }
-    };
-
-    res.sendFile('/index.html', options, function (err)
+    res.sendFile('/index.html', function (err)
     {
        if (err)
        {
