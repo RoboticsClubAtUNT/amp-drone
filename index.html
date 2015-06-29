@@ -57,16 +57,20 @@
         function newPic()
         {
           socket.emit('pic');
-          var newImage = new Image();
-          newImage.src = "/static/robot.jpg?t=" + new Date().getTime();
-          document.getElementById("picRobot").src = newImage.src;
         }
+
+        socket.on('newPic', function(data)
+        {
+          var d = new Date();
+          var newImage = 'static/robot.jpg?' + d.getMillicseconds();
+          picRobot.src(newImage);
+        });
 
     </script>
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
-                <img src="/static/robot.jpg" height="480" width="640" alt="No image found">
+                <img src="" height="480" width="640" alt="No image found">
                 <div class="btn-group">
                     <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
                     <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
