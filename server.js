@@ -1,15 +1,24 @@
-var express = require("express");
+var express = require('express');
 var app = express();
 var port = 3030;
 var io = require('socket.io').listen(app.listen(port));
-
 var five = require('johnny-five');
+var RaspiCam = require('raspicam');
+
+var camera = new RaspiCam({
+    mode: 'photo',
+    w: 640,
+    h: 480,
+    output: '/home/pi/node_programs/amp-drone/raspi-cam/public/robot.jpg',
+    timeout: 100,
+    encoding: 'jpg'
+    });
 
 app.use('/static', express.static('public'));
 
 var board = new five.Board();
 
-app.get('/', function (req, res)
+app.get('/', function(req, res)
 {
     var options = {
       root: __dirname + '/',
@@ -20,7 +29,7 @@ app.get('/', function (req, res)
       }
     };
 
-    res.sendFile('/index.html', options, function (err)
+    res.sendFile('/index.html', options, function(err)
     {
        if (err)
        {
@@ -162,6 +171,11 @@ var motorGroupLeft_2 = new five.Motor({
     {
       motorDrive(255, 'forward');
       console.log('forward_func');
+    });
+
+    socket.on('pic', function(data)
+    {
+      var process_id = camera.start({});
     });
 
   });

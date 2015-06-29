@@ -54,6 +54,13 @@
           socket.emit('autoDrive');
         }
 
+        function newPic()
+        {
+          socket.emit('pic');
+          newImage.src = "/static/robot.jpg";
+          document.getElementById("picRobot").src = newImage.src;
+        }
+
     </script>
     <div class="container">
         <div class="row">
@@ -62,6 +69,7 @@
                 <div class="btn-group">
                     <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
                     <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
+                    <button id="picRobot" type="button" class="btn btn-default" onclick="newPic()">Get Picture</button>
                 </div>
             </div>
         </div>
