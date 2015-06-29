@@ -9,7 +9,7 @@ var camera = new RaspiCam({
     mode: 'photo',
     w: 640,
     h: 480,
-    output: '/home/pi/node_programs/amp-drone/raspi-cam/public/robot.jpg',
+    output: '/public/robot.jpg',
     timeout: 100,
     encoding: 'jpg'
     });
