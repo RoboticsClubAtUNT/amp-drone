@@ -6,11 +6,13 @@ var five = require('johnny-five');
 var RaspiCam = require('raspicam');
 
 var camera = new RaspiCam({
-    mode: 'photo',
+    mode: 'timelapse',
     w: 640,
     h: 480,
     output: '/home/pi/node_programs/amp-drone/public/robot.jpg',
-    timeout: 1000,
+    timeout: 9999999,
+    quality: 10,
+    timelapse: 100,
     encoding: 'jpg'
     });
 
@@ -176,11 +178,12 @@ var motorGroupLeft_2 = new five.Motor({
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});
+    });
 
-      board.wait(2000, function()
-      {
-        socket.emit('newPic');
-      });
+    camera.on('read', function(err, timestamp, filename)
+    {
+      //do stuff
+      socket.emit('newPic');
     });
 
   });
