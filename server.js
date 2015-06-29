@@ -186,6 +186,11 @@ var motorGroupLeft_2 = new five.Motor({
       socket.emit('newPic');
     });
 
+    socket.on('stopPic', function(data)
+    {
+      camera.stop();
+    });
+
   });
 
 });

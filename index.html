@@ -67,6 +67,11 @@
           pic.src = newImage;
         });
 
+        function stopPic()
+        {
+          socket.emit('stopPic');
+        }
+
     </script>
     <div class="container">
         <div class="row">
@@ -75,7 +80,8 @@
                 <div class="btn-group">
                     <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
                     <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
-                    <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Picture</button>
+                    <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
+                    <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
                 </div>
             </div>
         </div>
