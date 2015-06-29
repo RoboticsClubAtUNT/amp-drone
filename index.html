@@ -57,6 +57,7 @@
         function newPic()
         {
           socket.emit('pic');
+          var newImage = new Image();
           newImage.src = "/static/robot.jpg";
           document.getElementById("picRobot").src = newImage.src;
         }
