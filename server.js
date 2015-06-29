@@ -176,7 +176,11 @@ var motorGroupLeft_2 = new five.Motor({
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});
-      socket.emit('newPic');
+
+      board.wait(1050, function()
+      {
+        socket.emit('newPic');
+      });
     });
 
   });
