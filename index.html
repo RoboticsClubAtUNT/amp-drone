@@ -62,8 +62,9 @@
         socket.on('newPic', function(data)
         {
           var d = new Date();
+          var pic = document.getElementById(picRobot);
           var newImage = 'static/robot.jpg?' + d.getMilliseconds();
-          picRobot.src(newImage);
+          pic.src(newImage);
         });
 
     </script>
