@@ -14,7 +14,7 @@ var camera = new RaspiCam({
     quality: 5,
     timelapse: 100,
     encoding: 'jpg',
-    rotation: 180
+    rotation: 90
     });
 
 app.use('/static', express.static('public'));
@@ -156,11 +156,11 @@ var motorGroupLeft_2 = new five.Motor({
         }
         else if (turnAMP > 20)
         {
-          rightTurn(255, 255);
+          rightTurn(190, 190);
         }
         else if (turnAMP < -20)
         {
-          leftTurn(255, 255);
+          leftTurn(190, 190);
         }
         else
         {
