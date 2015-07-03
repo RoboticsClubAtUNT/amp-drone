@@ -11,9 +11,10 @@ var camera = new RaspiCam({
     h: 480,
     output: '/home/pi/node_programs/amp-drone/public/robot.jpg',
     timeout: 9999999,
-    quality: 10,
+    quality: 5,
     timelapse: 100,
-    encoding: 'jpg'
+    encoding: 'jpg',
+    rotation: 180
     });
 
 app.use('/static', express.static('public'));
@@ -153,15 +154,13 @@ var motorGroupLeft_2 = new five.Motor({
             motorDrive((pSpeed), 'backward');
           }
         }
-        else if (turnAMP > 5)
+        else if (turnAMP > 20)
         {
-          var right = pSpeed - (turnAMP * 3.64);
-          rightTurn(pSpeed, right);
+          rightTurn(255, 255);
         }
-        else if (turnAMP < -5)
+        else if (turnAMP < -20)
         {
-          var left = pSpeed + (turnAMP * 3.64);
-          leftTurn(pSpeed, left);
+          leftTurn(255, 255);
         }
         else
         {
