@@ -32,8 +32,8 @@
         for (var i = 0; i < gamepads.length; i++) {
           var gp = gamepads[i];
           if (gp) {
-            gamepadInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id +
-              ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
+            gamepadInfo.text("Gamepad connected at index " + gp.index + ": " + gp.id +
+              ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.");
             gameLoop();
             clearInterval(interval);
             }
@@ -77,7 +77,7 @@
                 <div class="btn-group">
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
-                    <p id ="gamepade-info"></p>
+                    <div id ="gamepade-info"></div>
                 </div>
             </div>
         </div>
