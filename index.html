@@ -17,37 +17,30 @@
 
         var socket = io.connect('http://raspberrypi:3030');  // change to the server IP address
 
-        function orientation(event)
-        {
-          //Alpha This is a compass 0 = North || 0 - 360
-          //socket.emit('alpha', {'alpha': event.alpha});
-          console.log("Magnetometer: "
-            + event.alpha + ", "
-            + event.beta + ", "
-            + event.gamma
-          );
+        var interval;
 
-          //gamma tilt left right Max +-90
-          //beta forward / backward tilt +-180
-          var magnetometer = [event.beta, event.gamma];
-          socket.emit('mag', {'Results': magnetometer});
-          // socket.emit('meter_2', {'gamma': event.gamma});
+        if (!('ongamepadconnected' in window)) {
+          // No gamepad events available, poll instead.
+          interval = setInterval(pollGamepads, 500);
         }
 
-        function getAccel()
-        {
-            if(window.DeviceOrientationEvent)
-           	{
-                window.addEventListener("deviceorientation", orientation, false);
+        function pollGamepads() {
+        var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+        for (var i = 0; i < gamepads.length; i++) {
+          var gp = gamepads[i];
+          if (gp) {
+            gamepadInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id +
+              ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
+            gameLoop();
+            clearInterval(interval);
             }
-           	else
-           	{
-                socket.emit('notSupported');
-                console.log("DeviceOrientationEvent is not supported");
-            }
-           //console.log('emittedKey ', {'letter': String.fromCharCode(e.charCode)});
-           //socket.emit('client_data', {'letter': String.fromCharCode(e.charCode)});
+          }
         }
+
+        window.addEventListener("gamepaddisconnected", function(e) {
+          console.log("Gamepad disconnected from index %d: %s",
+          e.gamepad.index, e.gamepad.id);
+        });
 
         function autoDrive()
         {
@@ -79,8 +72,6 @@
                 <h1>AMP-Drone<small> -A UNTRC project</small></h1>
                 <img id="picRobot" src="static/robot.jpg?" height="480" width="640" alt="No image found">
                 <div class="btn-group">
-                    <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
-                    <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
                 </div>
