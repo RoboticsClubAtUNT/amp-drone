@@ -14,9 +14,12 @@
   </head>
   <body>
     <script type="text/javascript">
-
         var socket = io.connect('http://raspberrypi:3030');  // change to the server IP address
-
+        var gamepadInfo = document.getElementById("gamepad-info");
+        var ball = document.getElementById("ball");
+        var start;
+        var a = 0;
+        var b = 0;
         var interval;
 
         if (!('ongamepadconnected' in window)) {
@@ -74,6 +77,7 @@
                 <div class="btn-group">
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
+                    <textarea id ="gamepade-info"></textarea>
                 </div>
             </div>
         </div>
