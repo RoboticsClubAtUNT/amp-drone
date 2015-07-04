@@ -14,7 +14,7 @@ var camera = new RaspiCam({
     quality: 5,
     timelapse: 100,
     encoding: 'jpg',
-    rotation: 90
+    rotation: 0
     });
 
 app.use('/static', express.static('public'));
