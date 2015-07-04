@@ -47,7 +47,7 @@
 
         function buttonPressed(b) {
           if (typeof(b) == "object") {
-            $('#gamepad-info').text('b pressed');
+            $('#gamepad-info').text(b' pressed');
             return b.pressed;
           }
           return b == 1.0;
@@ -70,9 +70,6 @@
           } else if (buttonPressed(gp.buttons[3])) {
             a--;
           }
-
-          ball.style.left = a * 2 + "px";
-          ball.style.top = b * 2 + "px";
 
           start = requestAnimationFrame(gameLoop);
         }
