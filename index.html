@@ -47,7 +47,7 @@
 
         function buttonPressed(b) {
           if (typeof(b) == "object") {
-            $('#gamepad-info').text(b' pressed');
+            $('#gamepad-info').text('button pressed');
             return b.pressed;
           }
           return b == 1.0;
