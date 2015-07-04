@@ -46,7 +46,7 @@
         });
 
         function buttonPressed(pad, buttonId) {
-          if (self.gamepads[pad] && BUTTONS[buttonId]) {
+          if (pad && buttonId) {
             var buttonIndex = BUTTONS[buttonId];
             if (buttonIndex === 4 || buttonIndex === 5) {
               console.log('button');
