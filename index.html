@@ -47,9 +47,9 @@
 
         function buttonPressed(b) {
           if (typeof(b) == "object") {
-            console.log('button pressed');
             return b.pressed;
           }
+          console.log('button pressed');
           return b == 1.0;
         }
 
