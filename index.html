@@ -253,7 +253,9 @@
         var requestId;
 
         function robotLoop() {
-          var axis_Y = [Gamepad.moved(0, "LEFT_Y"), Gamepad.moved(0, "RIGHT_Y")];
+          var axis_Y = [Gamepad.moved(0, "LEFT_Y")];
+          axis_Y[1] = Gamepad.moved(0, "RIGHT_Y");
+          console.log(axis_Y[0], axis_Y[1]);
 
           socket.emit('gamepad', {'axis_Y': axis_Y});
 
