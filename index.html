@@ -251,9 +251,8 @@
         }
         function robotLoop() {
           // body...
-          if (Gamepad.moved(Gamepad.gamepads[0], "LEFT_X")) {
-            console.log('13 pressed');
-          }
+          axis = Gamepad.moved(Gamepad.gamepads[0], "LEFT_X");
+          console.log(axis);
         }
 
     </script>
