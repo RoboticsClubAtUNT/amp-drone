@@ -208,7 +208,7 @@
           var gamepad = event.gamepad;
           self.gamepads[event.gamepad.id] = gamepad;
           startPolling();
-          $('#gamepad-info').text('gamepad connected')
+          $('#gamepad-info').text('gamepad connected');
         }
 
         /**
@@ -219,6 +219,7 @@
           self.gamepads[event.gamepad.id] = null;
           if (self.gamepads.length === 0) {
             stopPolling();
+            $('#gamepad-info').text('gamepad disconnected');
           }
         }
 
