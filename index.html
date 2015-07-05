@@ -208,6 +208,7 @@
           var gamepad = event.gamepad;
           self.gamepads[event.gamepad.id] = gamepad;
           startPolling();
+          $('#gamepad-info').text('gamepad connected')
         }
 
         /**
