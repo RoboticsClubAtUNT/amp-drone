@@ -153,10 +153,13 @@
           if (self.gamepads[pad] && BUTTONS[buttonId]) {
             var buttonIndex = BUTTONS[buttonId];
             if (buttonIndex === 4 || buttonIndex === 5) {
+              console.log('button 1');
               return self.gamepads[pad].buttons[buttonIndex] > self.SHOULDER0_BUTTON_THRESHOLD;
             } else if (buttonIndex === 6 || buttonIndex === 7) {
+              console.log('button 2');
               return self.gamepads[pad].buttons[buttonIndex] > self.SHOULDER1_BUTTON_THRESHOLD;
             } else {
+              console.log('button 3');
               return self.gamepads[pad].buttons[buttonIndex] > 0.5;
             }
           } else {
@@ -205,9 +208,6 @@
           var gamepad = event.gamepad;
           self.gamepads[event.gamepad.id] = gamepad;
           self.startPolling();
-          $('#gamepad-info').text("Gamepad connected at index " + gamepad.index + ": " + gamepad.id +
-+              ". It has " + gamepad.buttons.length + " buttons and " + gamepad.axes.length + " axes.");
-
         }
 
         /**
