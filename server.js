@@ -110,8 +110,8 @@ var motorGroupLeft_2 = new five.Motor({
         console.log('Case: right turn');
         break;
       case 'left':
-        motorGroupLeft_1.rev(minusSpeed);
-        motorGroupLeft_2.rev(minusSpeed);
+        motorGroupLeft_1.rev(speed);
+        motorGroupLeft_2.rev(speed);
 
         motorGroupRight_1.forward(speed);
         motorGroupRight_2.forward(speed);
