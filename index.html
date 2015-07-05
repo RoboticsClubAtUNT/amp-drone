@@ -256,8 +256,8 @@
           axis_Y[1] = Gamepad.moved(0, "RIGHT_Y");
           // console.log(axis_Y[0], right_axis_Y);
           socket.emit('gamepad', {'axis_Y': axis_Y});
-          var dPad = [Gamepad.pressed(0, 12), Gamepad.pressed(0, 13),
-            Gamepad.pressed(0, 14), Gamepad.pressed(0, 15)];
+          var dPad = [Gamepad.pressed(0, 'PAD_UP'), Gamepad.pressed(0, 'PAD_DOWN'),
+            Gamepad.pressed(0, 'PAD_LEFT'), Gamepad.pressed(0, 'PAD_RIGHT')];
           socket.emit('gamepad', {'dpad': dPad});
           console.log(dPad);
 
