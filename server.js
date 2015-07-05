@@ -132,6 +132,7 @@ var motorGroupLeft_2 = new five.Motor({
     {
         var left_Y_Axis = data.axis_Y[0];
         var right_Y_Axis = data.axis_Y[1];
+        console.log(left_Y_Axis, right_Y_Axis);
 
         if (left_Y_Axis == 1 && right_Y_Axis == 1)
         {
@@ -150,7 +151,7 @@ var motorGroupLeft_2 = new five.Motor({
           motorDrive(210, 'left');
         }
         else {
-          motorDrive(0, 'stop');
+          // motorDrive(0, 'stop');
         }
     });
 
