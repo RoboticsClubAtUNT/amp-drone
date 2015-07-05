@@ -219,8 +219,8 @@
           self.gamepads[event.gamepad.id] = null;
           if (self.gamepads.length === 0) {
             stopPolling();
-            $('#gamepad-info').text('gamepad disconnected');
           }
+          $('#gamepad-info').text('gamepad disconnected');
         }
 
         return self;
