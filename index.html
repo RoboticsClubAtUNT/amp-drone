@@ -251,7 +251,7 @@
         }
         function robotLoop() {
           // body...
-          if (Gamepad.pressed(Gamepad.gamepads[0], 13)) {
+          if (Gamepad.moved(Gamepad.gamepads[0], "LEFT_X")) {
             console.log('13 pressed');
           }
         }
