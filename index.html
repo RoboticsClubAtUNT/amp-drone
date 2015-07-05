@@ -250,9 +250,17 @@
           socket.emit('stopPic');
         }
 
+        function robotLoop() {
           axis = Gamepad.moved(0, "LEFT_X");
           console.log(axis);
-          
+
+          ball.style.left = a * 2 + "px";
+          ball.style.top = b * 2 + "px";
+
+          start = requestAnimationFrame(robotLoop);
+        }
+
+
     </script>
     <div class="container">
         <div class="row">
