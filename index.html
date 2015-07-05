@@ -256,8 +256,11 @@
           var axis_Y = [Gamepad.moved(0, "LEFT_Y")];
           axis_Y[1] = Gamepad.moved(0, "RIGHT_Y");
           // console.log(axis_Y[0], right_axis_Y);
-
           socket.emit('gamepad', {'axis_Y': axis_Y});
+          var dPad = [Gamepad.pressed(0, 12), Gamepad.pressed(0, 13),
+            Gamepad.pressed(0, 14), Gamepad.pressed(0, 15)];
+          socket.emit('gamepad', {'dpad': dpad});
+          console.log(dpad[]);
 
           requestId = window.requestAnimationFrame(robotLoop);
         }
