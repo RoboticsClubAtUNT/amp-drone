@@ -260,7 +260,7 @@
           var dPad = [Gamepad.pressed(0, 12), Gamepad.pressed(0, 13),
             Gamepad.pressed(0, 14), Gamepad.pressed(0, 15)];
           socket.emit('gamepad', {'dpad': dpad});
-          console.log(dpad[]);
+          console.log(dpad);
 
           requestId = window.requestAnimationFrame(robotLoop);
         }
