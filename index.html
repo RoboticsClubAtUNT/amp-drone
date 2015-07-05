@@ -21,11 +21,7 @@
                 !!navigator.webkitGamepads || !!navigator.mozGamepads ||
                 !!navigator.msGamepads || !!navigator.gamepads ||
                 (navigator.getGamepads && navigator.getGamepads());
-        if (self.supported) {
-          $('#gamepad-info').text("Gamepad connected at index " + gp.index + ": " + gp.id +
-+              ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.");
 
-        }
         self.ticking = false;
 
         var BUTTONS = {
@@ -209,6 +205,9 @@
           var gamepad = event.gamepad;
           self.gamepads[event.gamepad.id] = gamepad;
           self.startPolling();
+          $('#gamepad-info').text("Gamepad connected at index " + gamepad.index + ": " + gamepad.id +
++              ". It has " + gamepad.buttons.length + " buttons and " + gamepad.axes.length + " axes.");
+
         }
 
         /**
