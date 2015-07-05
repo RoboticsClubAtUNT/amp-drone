@@ -207,7 +207,7 @@
         function onGamepadConnect(event) {
           var gamepad = event.gamepad;
           self.gamepads[event.gamepad.id] = gamepad;
-          self.startPolling();
+          startPolling();
         }
 
         /**
