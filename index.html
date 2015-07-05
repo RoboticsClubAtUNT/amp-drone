@@ -258,8 +258,7 @@
             start = requestAnimationFrame(robotLoop);
           }
           else {
-            cancelAnimationFrame(start);
-            start = undefined;
+            start = cancelAnimationFrame(robotLoop);;
             return;
           }
         }
