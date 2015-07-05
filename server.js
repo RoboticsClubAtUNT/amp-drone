@@ -150,7 +150,7 @@ var motorGroupLeft_2 = new five.Motor({
           motorDrive(210, 'left');
         }
         else {
-          motorDrive(pSpeed, 'stop');
+          motorDrive(0, 'stop');
         }
     });
 
