@@ -142,11 +142,11 @@ var motorGroupLeft_2 = new five.Motor({
         {
           motorDrive(210, 'backward');
         }
-        else if ((left_Y_Axis == 1 && right_Y_Axis == -1) || data.dpad[3])
+        else if ((left_Y_Axis == -1 && right_Y_Axis == 1) || data.dpad[3])
         {
           motorDrive(210, 'right');
         }
-        else if ((left_Y_Axis == -1 && right_Y_Axis == 1) || data.dpad[2])
+        else if ((left_Y_Axis == 1 && right_Y_Axis == -1) || data.dpad[2])
         {
           motorDrive(210, 'left');
         }
