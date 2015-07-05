@@ -249,6 +249,14 @@
         {
           socket.emit('stopPic');
         }
+        function robotLoop() {
+          // body...
+          if (Gamepad.pressed(gamepad, 13)) {
+            console.log('13 pressed');
+          }
+          robotLoop();
+        }
+
 
     </script>
     <div class="container">
