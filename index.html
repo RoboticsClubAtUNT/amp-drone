@@ -250,17 +250,25 @@
           socket.emit('stopPic');
         }
 
-        function robotLoop(start) {
+        var requestId;
+
+        function robotLoop() {
           axis = Gamepad.moved(0, "LEFT_X");
           console.log(axis);
-          if(start)
-          {
-            start = requestAnimationFrame(robotLoop);
-          }
-          else {
-            start = cancelAnimationFrame(robotLoop);;
-            return;
-          }
+          requestId = window.requestAnimationFrame(robotLoop);
+        }
+
+        function robotStart() {
+            if (!requestId) {
+               loop();
+            }
+        }
+
+        function robotStop() {
+            if (requestId) {
+               window.cancelAnimationFrame(requestId);
+               requestId = undefined;
+            }
         }
 
 
@@ -273,8 +281,8 @@
                 <div class="btn-group">
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
-                    <button id="gamepad-id-start" type="button" class="btn btn-default" onclick="robotLoop(1)">Gamepad Start</button>
-                    <button id="gamepad-id-stop" type="button" class="btn btn-default" onclick="robotLoop(0)">Gamepad Stop</button>
+                    <button id="gamepad-id-start" type="button" class="btn btn-default" onclick="robotStart()">Gamepad Start</button>
+                    <button id="gamepad-id-stop" type="button" class="btn btn-default" onclick="robotStop()">Gamepad Stop</button>
                     <div id="gamepad-info"></div>
                 </div>
             </div>
