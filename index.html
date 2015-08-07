@@ -14,15 +14,19 @@
   </head>
   <body>
 <script type="text/javascript">
-    var socket = io.connect('http://raspberrypi:3030');
-    function socket_connect()
+
+    function socket_connect(access)
     {
         if (access == "remote")
         {
             var socket = io.connect('http://jeffanderson.duckdns.org:3030');
         }
+        else {
+            var socket = io.connect('http://raspberrypi:3030');
+        }
     }
 
+    socket_connect("remote")
 
 //------------------------------------------------------------------Magnetometer
     function orientation(event)
@@ -335,8 +339,8 @@
             </div>
             <div class="col-sm-4">
                 <div class="btn-group">
-                    <button id="remote" type="button" class="btn btn-default" onclick="access=remote; socket_connect();">Remote</button>
-                    <button id="local" type="button" class="btn btn-default" onclick="access=local; socket_connect();">Remote</button>
+                    <button id="remote" type="button" class="btn btn-default" onclick="access=remote; socket_connect(access);">Remote</button>
+                    <button id="local" type="button" class="btn btn-default" onclick="access=local; socket_connect(access);">Local</button>
                 </div>
             </div>
         </div>
