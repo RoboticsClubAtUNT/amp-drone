@@ -53,87 +53,111 @@ board.on('ready', function() {
 var motorGroupRight_1 = new five.Motor({
   pins: {
     pwm: 3,
-    dir: 2,
-    cdir: 4
+    dir: 4,
+    cdir: 2
   }
 });
 var motorGroupRight_2 = new five.Motor({
   pins: {
     pwm: 5,
-    dir: 6,
-    cdir: 7
+    dir: 7,
+    cdir: 6
   }
 });
 
 var motorGroupLeft_1 = new five.Motor({
   pins: {
     pwm: 9,
-    dir: 8,
-    cdir: 10
+    dir: 10,
+    cdir: 8
   }
 });
 var motorGroupLeft_2 = new five.Motor({
   pins: {
     pwm: 11,
-    dir: 12,
-    cdir: 13
+    dir: 13,
+    cdir: 12
   }
 });
 
-  function motorDrive(speed, direction)
+
+function motorDrive(speed, direction)
+{
+  switch (direction)
   {
-    switch (direction)
-    {
-      case 'forward':
-        motorGroupRight_1.forward(speed);
-        motorGroupRight_2.forward(speed);
+    case 'forward':
+      motorGroupRight_1.forward(speed);
+      motorGroupRight_2.forward(speed);
 
-        motorGroupLeft_1.forward(speed);
-        motorGroupLeft_2.forward(speed);
+      motorGroupLeft_1.forward(speed);
+      motorGroupLeft_2.forward(speed);
 
-        console.log('Case: forward - ', speed);
-        break;
-      case 'backward':
-        motorGroupRight_1.rev(speed);
-        motorGroupRight_2.rev(speed);
+      console.log('Case: forward - ', speed);
+      break;
+    case 'backward':
+      motorGroupRight_1.rev(speed);
+      motorGroupRight_2.rev(speed);
 
-        motorGroupLeft_1.rev(speed);
-        motorGroupLeft_2.rev(speed);
-        console.log('Case: backward - ', speed);
-        break;
-      case 'stop':
-        motorGroupRight_1.stop();
-        motorGroupRight_2.stop();
-
-        motorGroupLeft_1.stop();
-        motorGroupLeft_2.stop();
-        console.log('Case: Stop - ', speed);
-    }
-  }
-
-  function rightTurn(speed, minusSpeed)
-  {
-      motorGroupRight_1.rev(minusSpeed);
-      motorGroupRight_2.rev(minusSpeed);
+      motorGroupLeft_1.rev(speed);
+      motorGroupLeft_2.rev(speed);
+      console.log('Case: backward - ', speed);
+      break;
+    case 'right':
+      motorGroupRight_1.rev(speed);
+      motorGroupRight_2.rev(speed);
 
       motorGroupLeft_1.forward(speed);
       motorGroupLeft_2.forward(speed);
       console.log('Case: right turn');
-  }
-
-  function leftTurn(speed, minusSpeed)
-  {
-      motorGroupLeft_1.rev(minusSpeed);
-      motorGroupLeft_2.rev(minusSpeed);
+      break;
+    case 'left':
+      motorGroupLeft_1.rev(speed);
+      motorGroupLeft_2.rev(speed);
 
       motorGroupRight_1.forward(speed);
       motorGroupRight_2.forward(speed);
+      break;
+    case 'stop':
+      motorGroupRight_1.stop();
+      motorGroupRight_2.stop();
 
-      console.log('Case: Left turn');
+      motorGroupLeft_1.stop();
+      motorGroupLeft_2.stop();
+      console.log('Case: Stop - ', speed);
   }
+}
 
   io.on('connection', function(socket)
   {
+
+      socket.on('gamepad', function(data)
+      {
+          var left_Y_Axis = data.axis_Y[0];
+          var right_Y_Axis = data.axis_Y[1];
+          console.log(left_Y_Axis, right_Y_Axis);
+
+          if ((left_Y_Axis == -1 && right_Y_Axis == -1) || data.dpad[0])
+          {
+            motorDrive(210, 'forward');
+          }
+          else if ((left_Y_Axis == 1 && right_Y_Axis == 1) || data.dpad[1])
+          {
+            motorDrive(210, 'backward');
+          }
+          else if ((left_Y_Axis == -1 && right_Y_Axis == 1) || data.dpad[3])
+          {
+            motorDrive(210, 'right');
+          }
+          else if ((left_Y_Axis == 1 && right_Y_Axis == -1) || data.dpad[2])
+          {
+            motorDrive(210, 'left');
+          }
+          else {
+            motorDrive(0, 'stop');
+          }
+    });
+
+
     socket.on('mag', function(data)
     {
         var turnAMP = data.Results[0];
