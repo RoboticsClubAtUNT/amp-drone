@@ -15,15 +15,9 @@
   <body>
 <script type="text/javascript">
 
-    function socket_connect(access)
-    {
-        if (access == "remote")
-        {
-            var socket = io.connect('http://jeffanderson.duckdns.org:3030');
-        }
-        else {
-            var socket = io.connect('http://raspberrypi:3030');
-        }
+
+    var socket = io.connect('http://jeffanderson.duckdns.org:3030');
+
 
 
 
@@ -288,6 +282,7 @@
       pic.src = newImage;
     });
 
+
     function stopPic()
     {
       socket.emit('stopPic');
@@ -295,7 +290,6 @@
 
 
     var requestId;
-
     function robotLoop() {
       var axis_Y = [Gamepad.moved(0, "LEFT_Y")];
       axis_Y[1] = Gamepad.moved(0, "RIGHT_Y");
@@ -307,19 +301,19 @@
       requestId = window.requestAnimationFrame(robotLoop);
     }
 
+
     function robotStart() {
         if (!requestId) {
            robotLoop();
         }
     }
 
+
     function robotStop() {
         if (requestId) {
            window.cancelAnimationFrame(requestId);
            requestId = undefined;
         }
-    }
-
     }
 </script>
     <div class="container">
@@ -335,12 +329,6 @@
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
                     <div id="gamepad-info"></div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="btn-group">
-                    <button id="remote" type="button" class="btn btn-default" onclick="access=remote; socket_connect(access);">Remote</button>
-                    <button id="local" type="button" class="btn btn-default" onclick="access=local; socket_connect(access);">Local</button>
                 </div>
             </div>
         </div>
