@@ -207,6 +207,13 @@ function motorDrive(speed, direction)
         }
       });
     });
+    socket.on('kill_drive', function(data)
+    {
+      child.on('close', function(code, signal){
+        console.log('child process terminated due to receipt of signal '+signal);
+      });
+      child.kill()
+    })
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});
