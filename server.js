@@ -206,7 +206,7 @@ function motorDrive(speed, direction)
           console.log('exec error: ' + error);
         }
       });
-    }
+    });
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});
