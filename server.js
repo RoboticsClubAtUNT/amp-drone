@@ -212,8 +212,11 @@ function motorDrive(speed, direction)
     socket.on('kill_drive', function(data)
     {
       console.log('killing pid: ', child.pid);
-      child.kill('SIGTERM')
-    })
+      child.on('close', function(code, signal){
+        console.log('child process terminated due to receipt of signal '+signal);
+      });
+      child.kill('SIGTERM');
+    });
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});
@@ -228,9 +231,6 @@ function motorDrive(speed, direction)
     socket.on('stopPic', function(data)
     {
       camera.stop();
-    });
-    child.on('close', function(code, signal){
-      console.log('child process terminated due to receipt of signal '+signal);
     });
   });
 
