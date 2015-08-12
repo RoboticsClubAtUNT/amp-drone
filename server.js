@@ -6,6 +6,7 @@ var five = require('johnny-five');
 var RaspiCam = require('raspicam');
 var exec = require('child_process').exec,
     child;
+var psTree = require('ps-tree');
 
 var camera = new RaspiCam({
     mode: 'timelapse',
@@ -212,10 +213,7 @@ function motorDrive(speed, direction)
     socket.on('kill_drive', function(data)
     {
       console.log('killing pid: ', child.pid);
-      child.on('close', function(code, signal){
-        console.log('child process terminated due to receipt of signal '+signal);
-      });
-      child.kill('SIGTERM');
+      kill(child.pid);
     });
     socket.on('pic', function(data)
     {
@@ -234,4 +232,27 @@ function motorDrive(speed, direction)
     });
   });
 
+
+  var kill = function (pid, signal, callback) {
+      signal   = signal || 'SIGKILL';
+      callback = callback || function () {};
+      var killTree = true;
+      if(killTree) {
+          psTree(pid, function (err, children) {
+              [pid].concat(
+                  children.map(function (p) {
+                      return p.PID;
+                  })
+              ).forEach(function (tpid) {
+                  try { process.kill(tpid, signal) }
+                  catch (ex) { }
+              });
+              callback();
+          });
+      } else {
+          try { process.kill(pid, signal) }
+          catch (ex) { }
+          callback();
+      }
+  };
 });
