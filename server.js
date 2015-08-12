@@ -4,6 +4,8 @@ var port = 3030;
 var io = require('socket.io').listen(app.listen(port));
 var five = require('johnny-five');
 var RaspiCam = require('raspicam');
+var exec = require('child_process').exec,
+    child;
 
 var camera = new RaspiCam({
     mode: 'timelapse',
@@ -192,12 +194,19 @@ function motorDrive(speed, direction)
         }
     });
 
-    socket.on('autoDrive', function(data)
+    socket.on('auto_drive', function(data)
     {
-      motorDrive(255, 'forward');
-      console.log('forward_func');
-    });
-
+      child = exec('python /home/pi/python/opencv_picam/follow_face.py',
+      function (error, stdout, stderr)
+      {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null)
+        {
+          console.log('exec error: ' + error);
+        }
+      });
+    }
     socket.on('pic', function(data)
     {
       var process_id = camera.start({});

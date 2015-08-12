@@ -264,9 +264,9 @@
   })(Gamepad || {});
 
 
-    function autoDrive()
+    function auto_drive()
     {
-      socket.emit('autoDrive');
+      socket.emit('auto_drive');
     }
 
     function newPic()
@@ -325,11 +325,14 @@
                     <button id="accel" type="button" class="btn btn-default" onclick="getAccel()">Accelerometer</button>
                     <button id="gamepad-id-start" type="button" class="btn btn-default" onclick="robotStart()">Gamepad Start</button>
                     <button id="gamepad-id-stop" type="button" class="btn btn-default" onclick="robotStop()">Gamepad Stop</button>
-                    <button id="auto" type="button" class="btn btn-default" onclick="autoDrive()">Auto Drive</button>
+                </div>
+                <br>
+                <div class="btn-group">
+                    <button id="auto" type="button" class="btn btn-default" onclick="auto_drive()">Auto Drive</button>
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
-                    <div id="gamepad-info"></div>
                 </div>
+                <div id="gamepad-info"></div>
             </div>
         </div>
     </div>
