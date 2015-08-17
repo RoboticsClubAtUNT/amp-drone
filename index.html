@@ -264,14 +264,15 @@
   })(Gamepad || {});
 
 
-    function auto_drive()
+    function auto_drive(data)
     {
-      socket.emit('auto_drive');
+      socket.emit('auto_drive', data);
     }
     function kill_drive()
     {
       socket.emit('kill_drive');
     }
+
 
     function newPic()
     {
@@ -332,9 +333,9 @@
                 </div>
                 <br>
                 <div class="btn-group">
-                    <button id="auto" type="button" class="btn btn-default" onclick="auto_drive()">Auto Drive</button>
-                    <button id="kill" type="button" class="btn btn-default" onclick="kill_drive()">Kill Auto Drive</button>
-                </div>
+                    <button id="color" type="button" class="btn btn-default" onclick="auto_drive(color)">Auto Drive - Color</button>
+                    <button id="auto" type="button" class="btn btn-default" onclick="auto_drive(face)">Auto Drive - Face</button>
+                    <button id="kill" type="button" class="btn btn-default" onclick="kill_drive()">Kill Drive</button>
                 <div class="btn-group">
                     <button id="picRobotBtn" type="button" class="btn btn-default" onclick="newPic()">Get Feed</button>
                     <button id="stopButton" type="button" class="btn btn-default" onclick="stopPic()">Stop Feed</button>
