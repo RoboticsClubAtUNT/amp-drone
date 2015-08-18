@@ -197,10 +197,10 @@ function motorDrive(speed, direction)
 
     socket.on('auto_drive', function(data)
     {
-      if (data=="face") {
+      if (data == 'face') {
         cmd_python = 'python /home/pi/python/opencv_picam/follow_face.py';
       }
-      else if (data=="color") {
+      else if (data == 'color') {
         cmd_python = 'python /home/pi/python/opencv_picam/follow_color.py';
       }
       child = exec(cmd_python,
