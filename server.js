@@ -10,14 +10,14 @@ var psTree = require('ps-tree');
 
 var camera = new RaspiCam({
     mode: 'timelapse',
-    w: 640,
-    h: 480,
+    w: 480,
+    h: 640,
     output: '/home/pi/node_programs/amp-drone/public/robot.jpg',
     timeout: 9999999,
     quality: 5,
     timelapse: 100,
     encoding: 'jpg',
-    rotation: 90
+    rotation: 180
     });
 
 app.use('/static', express.static('public'));
